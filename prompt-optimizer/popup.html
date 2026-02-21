@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prompt Optimizer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1>Prompt Optimizer</h1>
+    <p class="subtitle">AI-powered rewriting &amp; extraction</p>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="rewrite" role="tab" aria-selected="true">Rewrite</button>
+    <button class="tab" data-tab="extract" role="tab" aria-selected="false">Extract</button>
+    <button class="tab" data-tab="settings" role="tab" aria-selected="false">Settings</button>
+  </nav>
+
+  <!-- ===== REWRITE TAB ===== -->
+  <section id="tab-rewrite" class="tab-panel active">
+    <textarea id="input" placeholder="Paste your prompt or select text on any page..." rows="5"></textarea>
+
+    <div class="controls-row">
+      <select id="tone" aria-label="Tone">
+        <option value="neutral">Neutral</option>
+        <option value="formal">Formal</option>
+        <option value="casual">Casual</option>
+        <option value="persuasive">Persuasive</option>
+        <option value="friendly">Friendly</option>
+      </select>
+      <select id="length" aria-label="Length">
+        <option value="same">Same length</option>
+        <option value="shorter">Shorter</option>
+        <option value="longer">More detailed</option>
+      </select>
+      <select id="formality" aria-label="Formality">
+        <option value="auto">Auto</option>
+        <option value="informal">Informal</option>
+        <option value="semi-formal">Semi-formal</option>
+        <option value="formal">Formal</option>
+      </select>
+    </div>
+
+    <button id="optimize" class="btn primary">
+      <span class="btn-text">Optimize with AI</span>
+      <span class="spinner hidden"></span>
+    </button>
+
+    <!-- Compare View -->
+    <div id="compare-view" class="compare hidden">
+      <div class="compare-col">
+        <h3>Original</h3>
+        <div id="original-text" class="compare-box"></div>
+      </div>
+      <div class="compare-col">
+        <h3>Rewritten</h3>
+        <div id="rewritten-text" class="compare-box"></div>
+      </div>
+    </div>
+
+    <div class="action-row hidden" id="rewrite-actions">
+      <button id="copy" class="btn secondary">Copy Result</button>
+      <button id="replace-selection" class="btn secondary">Replace on Page</button>
+    </div>
+
+    <div id="error-msg" class="error hidden"></div>
+    <div id="token-info" class="token-info hidden"></div>
+  </section>
+
+  <!-- ===== EXTRACT TAB ===== -->
+  <section id="tab-extract" class="tab-panel hidden">
+    <p class="hint">Select text on any webpage, then click a button below.</p>
+
+    <button id="capture-selection" class="btn primary">Capture Selection</button>
+
+    <div id="extract-preview" class="extract-box hidden">
+      <h3>Captured Text</h3>
+      <div id="captured-text" class="compare-box"></div>
+    </div>
+
+    <div class="controls-row" id="extract-controls" style="display:none">
+      <button id="summarize" class="btn secondary">Summary</button>
+      <button id="bulletize" class="btn secondary">Bullets</button>
+      <button id="key-ideas" class="btn secondary">Key Ideas</button>
+    </div>
+
+    <div id="extract-output" class="extract-box hidden">
+      <h3>Result</h3>
+      <div id="extract-result" class="compare-box"></div>
+      <button id="copy-extract" class="btn secondary" style="margin-top:8px">Copy</button>
+    </div>
+
+    <div id="extract-error" class="error hidden"></div>
+  </section>
+
+  <!-- ===== SETTINGS TAB ===== -->
+  <section id="tab-settings" class="tab-panel hidden">
+    <div class="setting-group">
+      <label for="api-key">Gemini API Key</label>
+      <input type="password" id="api-key" placeholder="AIza..." autocomplete="off" />
+      <small class="hint">Stored locally. Never sent to any server except Google.</small>
+    </div>
+
+    <div class="setting-group">
+      <label for="model-select">Model</label>
+      <select id="model-select">
+        <option value="gemini-2.0-flash">Gemini 2.0 Flash (fast, cheap)</option>
+        <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite (fastest)</option>
+        <option value="gemini-2.5-pro-preview-05-06">Gemini 2.5 Pro (best quality)</option>
+      </select>
+    </div>
+
+    <div class="setting-group">
+      <label>
+        <input type="checkbox" id="local-history" checked />
+        Save history locally
+      </label>
+    </div>
+
+    <div class="setting-group">
+      <label>
+        <input type="checkbox" id="consent-toggle" checked />
+        I consent to sending text to Google Gemini for processing
+      </label>
+    </div>
+
+    <div class="setting-group">
+      <label>
+        <input type="checkbox" id="floating-bar-toggle" checked />
+        Show floating assistant bar on pages
+      </label>
+    </div>
+
+    <button id="save-settings" class="btn primary">Save Settings</button>
+    <div id="settings-status" class="hint"></div>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>

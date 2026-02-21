@@ -1,0 +1,136 @@
+/* ===== Floating Assistant Bar (injected by content script) ===== */
+
+#po-floating-bar {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2147483647;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #e0e0e0;
+}
+
+#po-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+#po-bar-inner.po-collapsed #po-bar-label,
+#po-bar-inner.po-collapsed #po-bar-tone,
+#po-bar-inner.po-collapsed #po-bar-rewrite,
+#po-bar-inner.po-collapsed #po-bar-summarize {
+  display: none;
+}
+
+#po-bar-label {
+  font-weight: 700;
+  font-size: 11px;
+  color: #e94560;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+#po-bar-inner select {
+  background: #16213e;
+  color: #e0e0e0;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 11px;
+  cursor: pointer;
+  outline: none;
+}
+
+#po-bar-inner select:focus {
+  border-color: #e94560;
+}
+
+#po-bar-inner button {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+#po-bar-inner button:hover {
+  background: #ff6b81;
+}
+
+#po-bar-collapse {
+  background: transparent !important;
+  color: #a0a0b8 !important;
+  font-size: 14px !important;
+  padding: 2px 6px !important;
+  min-width: 20px;
+}
+
+#po-bar-collapse:hover {
+  color: #e0e0e0 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Result area */
+#po-bar-result {
+  background: #16213e;
+  border: 1px solid #2a2a4a;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-top: 6px;
+  max-width: 360px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#po-bar-result-text {
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+
+#po-bar-result-actions {
+  display: flex;
+  gap: 6px;
+}
+
+#po-bar-result-actions button {
+  background: #0f3460;
+  color: #e0e0e0;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#po-bar-result-actions button:hover {
+  border-color: #e94560;
+  color: #e94560;
+}
+
+/* Scrollbar for result */
+#po-bar-result::-webkit-scrollbar {
+  width: 4px;
+}
+
+#po-bar-result::-webkit-scrollbar-thumb {
+  background: #2a2a4a;
+  border-radius: 2px;
+}
